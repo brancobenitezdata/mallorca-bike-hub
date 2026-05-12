@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
+import { places } from "@/data/places";
 import { supabase } from "@/lib/supabase";
 import RemoveSavedRouteButton from "@/components/RemoveSavedRouteButton";
 import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
   const [savedRouteIds, setSavedRouteIds] = useState<string[]>([]);
+  const [savedPlaceIds, setSavedPlaceIds] = useState<string[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,8 +20,15 @@ export default function ProfilePage() {
 
       if (!user) {
   router.push("/login");
+  
   return;
 }
+const { data: placesData } = await supabase
+  .from("saved_places")
+  .select("place_id")
+  .eq("user_id", user.id);
+
+setSavedPlaceIds(placesData?.map((item) => item.place_id) ?? []);
 
       const { data } = await supabase
         .from("saved_routes")
@@ -35,6 +44,9 @@ export default function ProfilePage() {
   const savedRoutes = routes.filter((route) =>
     savedRouteIds.includes(route.id)
   );
+  const savedPlaces = places.filter((place) =>
+  savedPlaceIds.includes(place.id)
+);
 
   return (
     <main className="min-h-screen bg-neutral-950 px-6 py-10 text-white">
@@ -144,7 +156,38 @@ export default function ProfilePage() {
             </div>
           )}
         </div>
+<div className="mt-10">
+  <div className="mb-6">
+    <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">
+      Saved places
+    </p>
 
+    <h2 className="mt-2 text-3xl font-bold">Your favorite cycling spots</h2>
+  </div>
+
+  {savedPlaces.length === 0 ? (
+    <div className="rounded-[32px] border border-dashed border-white/10 bg-white/5 p-8 text-center text-neutral-400">
+      No saved places yet.
+    </div>
+  ) : (
+    <div className="grid gap-6 md:grid-cols-3">
+      {savedPlaces.map((place) => (
+        <div
+          key={place.id}
+          className="group rounded-[32px] border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-2 hover:border-cyan-400/20 hover:bg-white/10"
+        >
+          <span className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-300">
+            {place.category}
+          </span>
+
+          <h3 className="mt-6 text-2xl font-semibold">{place.name}</h3>
+
+          <p className="mt-3 text-sm text-neutral-400">{place.location}</p>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
         <div className="mt-10">
           <div className="mb-6">
             <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">

@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { routes } from "@/data/routes";
 import { places } from "@/data/places";
+import SaveRouteButton from "@/components/SaveRouteButton";
+import SavePlaceButton from "@/components/SavePlaceButton";
 
 const ExploreMap = dynamic(() => import("@/components/ExploreMap"), {
   ssr: false,
@@ -278,12 +280,9 @@ export default function ExplorePage() {
                     Open full route
                   </Link>
 
-                  <button
-                    type="button"
-                    className="mt-3 block w-full rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-center font-medium text-white transition hover:bg-white/10"
-                  >
-                    Save route
-                  </button>
+                  <div className="mt-3">
+  <SaveRouteButton routeId={selectedRoute.id} />
+</div>
                 </>
               )}
 
@@ -305,12 +304,9 @@ export default function ExplorePage() {
                     {selectedPlace.description}
                   </p>
 
-                  <button
-                    type="button"
-                    className="mt-8 block w-full rounded-xl bg-cyan-400 px-5 py-3 text-center font-medium text-black transition hover:bg-cyan-300"
-                  >
-                    Save place
-                  </button>
+                  <div className="mt-8">
+  <SavePlaceButton placeId={selectedPlace.id} />
+</div>
                 </>
               )}
             </div>

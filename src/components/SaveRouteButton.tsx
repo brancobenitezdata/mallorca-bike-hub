@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 type Props = {
@@ -10,7 +10,30 @@ type Props = {
 export default function SaveRouteButton({ routeId }: Props) {
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+useEffect(() => {
+  async function checkSaved() {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
+    if (!user) return;
+
+    const { data } = await supabase
+      .from("saved_routes")
+      .select("id")
+      .match({
+        route_id: routeId,
+        user_id: user.id,
+      })
+      .single();
+
+    if (data) {
+      setSaved(true);
+    }
+  }
+
+  checkSaved();
+}, [routeId]);
   async function handleSave() {
   setLoading(true);
 
@@ -23,7 +46,20 @@ export default function SaveRouteButton({ routeId }: Props) {
     alert("Please login first");
     return;
   }
+const { data: existingRoute } = await supabase
+  .from("saved_routes")
+  .select("id")
+  .match({
+    route_id: routeId,
+    user_id: user.id,
+  })
+  .single();
 
+if (existingRoute) {
+  setLoading(false);
+  setSaved(true);
+  return;
+}
   const { error } = await supabase.from("saved_routes").insert({
     route_id: routeId,
     user_id: user.id,
