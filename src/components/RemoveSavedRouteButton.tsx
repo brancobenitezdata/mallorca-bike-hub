@@ -12,19 +12,19 @@ export default function RemoveSavedRouteButton({ routeId }: Props) {
 
   async function handleRemove() {
     const {
-  data: { user },
-} = await supabase.auth.getUser();
+      data: { user },
+    } = await supabase.auth.getUser();
 
-if (!user) {
-  alert("Please login first");
-  return;
-}
+    if (!user) {
+      alert("Please login first");
+      return;
+    }
 
-const { error } = await supabase
-  .from("saved_routes")
-  .delete()
-  .eq("route_id", routeId)
-  .eq("user_id", user.id);
+    const { error } = await supabase
+      .from("saved_routes")
+      .delete()
+      .eq("route_id", routeId)
+      .eq("user_id", user.id);
 
     if (error) {
       alert(error.message);
