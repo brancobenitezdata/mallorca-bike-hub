@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 type Props = {
@@ -8,8 +7,6 @@ type Props = {
 };
 
 export default function RemoveSavedRouteButton({ routeId }: Props) {
-  const router = useRouter();
-
   async function handleRemove() {
     const {
       data: { user },
@@ -23,15 +20,17 @@ export default function RemoveSavedRouteButton({ routeId }: Props) {
     const { error } = await supabase
       .from("saved_routes")
       .delete()
-      .eq("route_id", routeId)
-      .eq("user_id", user.id);
+      .match({
+        route_id: routeId,
+        user_id: user.id,
+      });
 
     if (error) {
       alert(error.message);
       return;
     }
 
-    window.location.reload();
+    window.location.href = "/profile";
   }
 
   return (
