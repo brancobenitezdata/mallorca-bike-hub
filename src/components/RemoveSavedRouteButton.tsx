@@ -31,7 +31,7 @@ export default function RemoveSavedRouteButton({ routeId }: Props) {
       return;
     }
 
-    router.refresh();
+    window.location.reload();
   }
 
   return (
