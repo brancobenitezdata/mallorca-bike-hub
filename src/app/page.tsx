@@ -14,7 +14,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
 
         <div
-          className="min-h-[760px] bg-cover bg-center md:h-[90vh]"
+          className="min-h-[820px] bg-cover bg-center md:h-[90vh]"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2000&auto=format&fit=crop')",
