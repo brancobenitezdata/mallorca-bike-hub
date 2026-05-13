@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import AuthNav from "@/components/AuthNav";
+import { Menu } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,12 +78,12 @@ export default function RootLayout({
                 About
               </Link>
             </div>
-            <Link
-  href="/login"
-  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10 md:hidden"
+            <button
+  type="button"
+  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10 md:hidden"
 >
-  Login
-</Link>
+  <Menu size={20} />
+</button>
           </div>
         </nav>
 
