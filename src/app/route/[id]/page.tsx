@@ -20,7 +20,7 @@ export default async function RouteDetailPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
-      <section className="relative h-[60vh] overflow-hidden">
+      <section className="relative min-h-[520px] overflow-hidden md:h-[60vh]">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -31,13 +31,13 @@ export default async function RouteDetailPage({ params }: Props) {
 
         <div className="absolute inset-0 bg-black/50" />
 
-        <div className="relative mx-auto flex h-full max-w-7xl items-end px-6 pb-16">
+        <div className="relative mx-auto flex h-full max-w-7xl items-end px-6 pb-10 md:pb-16">
           <div>
             <span className="rounded-full bg-red-400/15 px-3 py-1 text-sm font-medium text-red-300">
               {route.difficulty}
             </span>
 
-            <h1 className="mt-6 text-6xl font-bold tracking-tight">
+            <h1 className="mt-6 text-4xl font-bold tracking-tight md:text-6xl">
               {route.name}
             </h1>
 
@@ -52,7 +52,7 @@ export default async function RouteDetailPage({ params }: Props) {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           {[
             {
               label: "Distance",
@@ -91,7 +91,7 @@ export default async function RouteDetailPage({ params }: Props) {
             Route overview
           </p>
 
-          <h2 className="mt-3 text-4xl font-bold">
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold">
             About this ride
           </h2>
 
@@ -105,7 +105,7 @@ export default async function RouteDetailPage({ params }: Props) {
       Highlights
     </p>
 
-    <h2 className="mt-3 text-4xl font-bold">
+    <h2 className="mt-3 text-3xl md:text-4xl font-bold">
       What makes this route special
     </h2>
   </div>
@@ -150,7 +150,7 @@ export default async function RouteDetailPage({ params }: Props) {
       Route map
     </p>
 
-    <h2 className="mt-3 text-4xl font-bold">
+    <h2 className="mt-3 text-3xl md:text-4xl font-bold">
       Explore the route
     </h2>
   </div>
@@ -165,7 +165,7 @@ export default async function RouteDetailPage({ params }: Props) {
       Elevation profile
     </p>
 
-    <h2 className="mt-3 text-4xl font-bold">
+    <h2 className="mt-3 text-3xl md:text-4xl font-bold">
       Climbing analysis
     </h2>
   </div>
