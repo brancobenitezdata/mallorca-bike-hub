@@ -14,14 +14,14 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
 
         <div
-          className="h-[90vh] bg-cover bg-center"
+          className="min-h-[760px] bg-cover bg-center md:h-[90vh]"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2000&auto=format&fit=crop')",
           }}
         />
 
-        <div className="absolute inset-0 flex items-center">
+        <div className="absolute inset-0 flex items-center pt-10 md:pt-0">
           <div className="mx-auto w-full max-w-7xl px-6">
             <motion.div
   initial={{ opacity: 0, y: 30 }}
@@ -33,26 +33,26 @@ export default function HomePage() {
                 Mallorca Bike Hub
               </p>
 
-              <h1 className="mt-6 text-6xl font-bold leading-tight tracking-tight md:text-7xl">
+              <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-7xl">
                 Discover the best cycling routes in Mallorca
               </h1>
 
-              <p className="mt-6 max-w-2xl text-lg text-neutral-300">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-neutral-300 md:text-lg">
                 Explore iconic climbs, coastal roads, cafés, rentals and
                 cycling hotspots across the island.
               </p>
 
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap sm:gap-4">
                 <Link
                   href="/explore"
-                  className="rounded-full bg-white px-6 py-3 font-medium text-black transition hover:bg-neutral-200"
+                  className="rounded-full bg-white px-6 py-3 text-center font-medium text-black transition hover:bg-neutral-200"
                 >
                   Explore map
                 </Link>
 
                 <Link
                   href="/routes"
-                  className="rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium text-white backdrop-blur transition hover:bg-white/20"
+                  className="rounded-full bg-white px-6 py-3 text-center font-medium text-black transition hover:bg-neutral-200"
                 >
                   View routes
                 </Link>
@@ -70,7 +70,7 @@ export default function HomePage() {
       },
     },
   }}
-  className="mt-12 grid max-w-3xl gap-4 sm:grid-cols-3"
+  className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3 md:mt-12 md:gap-4"
 >
   {[
     { title: "Sa Calobra", label: "Iconic climb", accent: "from-emerald-400/20" },
